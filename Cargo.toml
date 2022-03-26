@@ -1,0 +1,14 @@
+[package]
+name = "blog_os"
+version = "0.1.0"
+edition = "2018"
+
+# Stack unwinding is fairly complicated and (as far as I can tell)
+# outside the scope of this tutorial (https://os.phil-opp.com/), so
+# instead, we'll abort (https://github.com/rust-lang/rust/pull/32900).
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
