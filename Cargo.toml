@@ -16,3 +16,18 @@ panic = "abort"
 [dependencies]
 # Implements a basic BIOS (as opposed to UEFI) bootloader.
 bootloader = "0.9.8"
+# Provides a basic spinlock so we can write to our VGA
+# buffer (we can't use a `Mutex` because we don't have
+# the necessary OS primitives--such as threads--yet).
+spin = "0.5.2"
+# Allows us to mark effectful code so future versions of
+# the Rust compiler don't optimize those lines of code away.
+volatile = "0.2.6"
+
+[dependencies.lazy_static]
+# Provides one-time initialization of statics with non-const
+# functions, which we need to initialize `ColorCode::new` in
+# `src/vga_buffer.rs`.
+version = "1.0"
+# Needed because we don't link the standard library.
+features = ["spin_no_std"]
